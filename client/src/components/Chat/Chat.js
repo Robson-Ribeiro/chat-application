@@ -29,12 +29,14 @@ const Chat = ({ location }) => {
         setName(name);
         setRoom(room);
 
-        socket.emit('join', { name, room }, () => {
-            
+        socket.emit('join', { name, room }, (error) => {
+            if(error){
+                alert(error);
+            }
         });
         // Similar to componentWillUnmount
         return () => {
-            //socket.emit('disconnect');
+            socket.emit('disconnection');
             socket.off();
         }
 
