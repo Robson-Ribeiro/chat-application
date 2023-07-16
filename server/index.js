@@ -1,6 +1,14 @@
 const express = require('express');
-const socketio = require('socket.io');
-const http = require('http');
+const app = express();
+
+const http = require('http').Server(app);
+
+const io = require('socket.io')(http, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"]
+    }
+  });
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
@@ -8,13 +16,12 @@ const PORT = process.env.PORT || 5000;
 
 const router = require('./router');
 
-const app = express();
-const server = http.createServer(app);
-io = socketio(server);
 
 io.on('connection', (socket) => {
+    console.log(socket);
 
     socket.on('join', ({ name, room }, callback) => {
+        console.log('Join working...');
         const { error, user } = addUser({ id: socket.id, name, room });
 
         if(error) return callback(error);
@@ -48,7 +55,7 @@ io.on('connection', (socket) => {
 
 app.use(router);
 
-server.listen(PORT, () => {
+http.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
 });
 
