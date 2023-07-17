@@ -14,9 +14,6 @@ const Input = ({ message, setMessage, sendMessage }) => (
         />
         <button className='sendButton' onClick={(event) => sendMessage(event)}>Send</button>
     </form>
-
- 
-
 )
 
 export default Input;

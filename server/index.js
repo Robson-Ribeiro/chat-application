@@ -18,10 +18,7 @@ const router = require('./router');
 
 
 io.on('connection', (socket) => {
-    console.log(socket);
-
     socket.on('join', ({ name, room }, callback) => {
-        console.log('Join working...');
         const { error, user } = addUser({ id: socket.id, name, room });
 
         if(error) return callback(error);
@@ -43,7 +40,8 @@ io.on('connection', (socket) => {
         callback();
     });
 
-    socket.on('disconnection', () => {
+    socket.on('disconnectUser', () => {
+        console.log('disconnected');
         const user = removeUser(socket.id);
 
         if(user) {
