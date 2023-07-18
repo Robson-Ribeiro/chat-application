@@ -6,7 +6,7 @@ import './User.css';
 
 const User = ({ name }) => (
     <div className="userContainer">
-       <img src={onlineIcon} alt="online"/> <p>{name}</p>
+       <img className="onlineUser" src={onlineIcon} alt="online"/> <p className="userName">{name}</p>
     </div>
 )
 

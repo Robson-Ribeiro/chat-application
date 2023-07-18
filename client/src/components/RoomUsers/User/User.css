@@ -1,0 +1,11 @@
+.userContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.userName {
+    margin-left: 3px;
+    float: left;
+    word-wrap: break-word;
+}
